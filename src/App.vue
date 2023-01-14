@@ -1,9 +1,9 @@
 <template>
-  <div class="">
-    <n-button type="primary"> Primary </n-button>
-  </div>
+  <MainView />
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import MainView from '@/pages/MainView.vue'
+</script>
 
-<style lang="sass" scoped></style>
+<style lang="scss" scoped></style>

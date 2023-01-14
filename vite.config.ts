@@ -5,26 +5,21 @@ import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import UnoCSS from 'unocss/vite'
 import DefineOptions from 'unplugin-vue-define-options/vite'
-import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 export default defineConfig({
   base: './',
   plugins: [
     vue(),
     AutoImport({
-      imports: [
-        'vue',
-        '@vueuse/core',
-        {
-          'naive-ui': ['useDialog', 'useMessage', 'useNotification', 'useLoadingBar'],
-        },
-      ],
+      resolvers: [ElementPlusResolver()],
+      imports: ['vue', '@vueuse/core'],
       dts: 'src/typings/auto-imports.d.ts',
       vueTemplate: true,
     }),
     UnoCSS(),
     Components({
-      resolvers: [NaiveUiResolver()],
+      resolvers: [ElementPlusResolver()],
       dts: 'src/typings/components.d.ts',
     }),
     DefineOptions(),

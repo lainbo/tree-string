@@ -9,6 +9,7 @@ import {
 import presetRemToPx from '@unocss/preset-rem-to-px'
 export default defineConfig({
   shortcuts: [
+    ['page-card', 'auto-bg shadow-md rounded-12px p-16px'],
     {
       'flex-c': 'flex items-center justify-center',
       'flex-y-c': 'flex items-center',
