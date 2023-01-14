@@ -23,7 +23,9 @@
 
 html,
 body {
-  font-family: var(--main-font-family) !important;
+  font-family: 'Inter', 'HarmonyOS Sans SC Medium', 'HarmonyOS Medium', 'NanumGothic',
+    'NotoSansThai', system-ui, —apple-system, Segoe UI, Rototo, Helvetica, Arial,
+    sans-serif !important;
   background-color: #fff;
   height: 100vh;
 }
