@@ -1,0 +1,53 @@
+// 鸿蒙字体
+@font-face {
+  font-display: swap;
+  font-family: 'HarmonyOS Medium';
+  src: url('https://efadmin.netlify.app/font/HarmonyOS_Sans_SC_Medium.woff2')
+    format('woff2');
+}
+
+// 英文字体
+@font-face {
+  font-display: swap;
+  font-family: 'Inter';
+  src: url('https://efadmin.netlify.app/font/Inter-Medium.woff2') format('woff2');
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+.dark ::selection {
+  background-color: #686868;
+}
+
+html,
+body {
+  font-family: var(--main-font-family) !important;
+  background-color: #fff;
+  height: 100vh;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  border-width: 0px;
+  @apply bg-#c9cdd4 dark:bg-#5f5f60;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-#86909c dark:bg-#929293;
+}
+
+::-webkit-scrollbar-track-piece {
+  @apply bg-#fff dark:bg-#272728;
+}
+
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
