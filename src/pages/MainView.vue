@@ -87,30 +87,16 @@ function 插入根节点() {
   树形结构.value.push(节点)
 }
 const displayTree = computed(() => {
-  /**
-   * 将树形结构转换为可显示的字符串树
-   * @param tree 当前要处理的树节点
-   * @param indent 当前节点的缩进字符串
-   * @param isTail 当前节点是否是其父节点的末尾节点
-   * @param isRoot 当前节点是否是根节点
-   * @returns 可显示的字符串树
-   */
   function generateString(tree: Tree, indent = '', isTail = true, isRoot = true): string {
     let str = ''
     if (!isRoot || (isRoot && 树形结构.value.length > 1)) {
-      // 如果不是根节点或者是根节点但根节点不止一个，添加符号
-      str = `${indent}${isTail ? '└─ ' : '├─ '}${tree.label}\n`
+      str = `${indent}${isTail ? '└── ' : '├── '}${tree.label}\n`
     } else {
-      // 如果是根节点且根节点只有一个，不添加符号
       str = `${tree.label}\n`
     }
-    // 如果当前节点有子节点
     if (tree.children && tree.children.length) {
-      // 遍历子节点
       tree.children.forEach((child, index) => {
-        // 定义子节点的缩进
-        const childIndent = indent + (isTail ? ' ' : '│ ')
-        // 递归调用generateString函数, 传入子节点、子节点缩进、当前子节点是否是末尾节点、false
+        const childIndent = indent + (isTail ? '    ' : '│   ')
         str += generateString(
           child,
           childIndent,
@@ -119,13 +105,18 @@ const displayTree = computed(() => {
         )
       })
     }
-    // 返回字符串树
     return str
   }
-
-  return 树形结构.value
-    .map((tree, index) => generateString(tree, '', index === 树形结构.value.length - 1))
-    .join('')
+  let isLast = false
+  let str = ''
+  const traverse = tree => {
+    tree.forEach((child, index) => {
+      isLast = index === tree.length - 1
+      str += generateString(child, '', isLast, false)
+    })
+  }
+  traverse(树形结构.value)
+  return str
 })
 </script>
 
