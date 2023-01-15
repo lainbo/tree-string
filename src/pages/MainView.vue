@@ -63,7 +63,11 @@ const 树形结构 = ref<Tree[]>([
 ])
 
 const append = (data: Tree) => {
-  const newChild = { id: nanoid(), label: 'testtest', children: [] }
+  const newChild = {
+    id: nanoid(),
+    label: `新节点${dayjs().format('YYYY-MM-DD HH:mm:ss')}`,
+    children: [],
+  }
   if (!data.children) {
     data.children = []
   }
@@ -86,7 +90,13 @@ function 插入根节点() {
   }
   树形结构.value.push(节点)
 }
-const displayTree = computed(() => {
+interface Tree {
+  id: string
+  label: string
+  children?: Tree[]
+}
+
+const displayTree = computed<string>(() => {
   function generateString(tree: Tree, indent = '', isTail = true, isRoot = true): string {
     let str = ''
     if (!isRoot || (isRoot && 树形结构.value.length > 1)) {
@@ -109,13 +119,14 @@ const displayTree = computed(() => {
   }
   let isLast = false
   let str = ''
-  const traverse = tree => {
+  const traverse = (tree: Tree[]) => {
     tree.forEach((child, index) => {
       isLast = index === tree.length - 1
-      str += generateString(child, '', isLast, false)
+      str += generateString(child, '', isLast, tree.length === 1)
     })
   }
-  traverse(树形结构.value)
+
+  traverse(树形结构.value as Tree[])
   return str
 })
 </script>
