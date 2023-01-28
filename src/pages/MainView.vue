@@ -67,17 +67,14 @@ const 树形结构 = ref<Tree[]>([
     id: '2',
     label: '节点 2',
     isEdit: false,
-    children: [
-      { id: '3', label: '节点 2-1', isEdit: false },
-      { id: '4', label: '节点 2-2', isEdit: false },
-    ],
+    children: [{ id: '3', label: '节点 2-1', isEdit: false }],
   },
 ])
 
 function append(data: Tree) {
   const newChild = {
     id: nanoid(),
-    label: `新节点${dayjs().format('YYYY-MM-DD HH:mm:ss')}`,
+    label: `新节点${dayjs().format('HH:mm:ss')}`,
     isEdit: false,
     children: [],
   }
@@ -110,7 +107,7 @@ function remove(node: any, data: Tree) {
 function 插入根节点() {
   const 节点 = {
     id: nanoid(),
-    label: `新节点${dayjs().format('YYYY-MM-DD HH:mm:ss')}`,
+    label: `新节点${dayjs().format('HH:mm:ss')}`,
     isEdit: false,
   }
   树形结构.value.push(节点)
