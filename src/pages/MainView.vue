@@ -21,6 +21,7 @@
                   v-else
                   ref="inputRef"
                   v-model="data.label"
+                  clearable
                   :style="{ width: '200px' }"
                   @blur="编辑提交(data)"
                 >
@@ -52,9 +53,10 @@
 </template>
 
 <script setup lang="ts">
-import { nanoid } from 'nanoid'
-import dayjs from 'dayjs'
+import { customAlphabet } from 'nanoid'
 import { treeTraversal } from '@/utils/treeTools'
+const str = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_'
+const nanoid = customAlphabet(str, 10)
 interface Tree {
   id: string
   label: string
@@ -72,16 +74,10 @@ const 树形结构 = ref<Tree[]>([
 ])
 
 function append(data: Tree) {
-  const newChild = {
-    id: nanoid(),
-    label: `新节点${dayjs().format('HH:mm:ss')}`,
-    isEdit: false,
-    children: [],
-  }
   if (!data.children) {
     data.children = []
   }
-  data.children.push(newChild)
+  data.children.push(返回一个节点())
   树形结构.value = [...树形结构.value]
 }
 function 编辑提交(node: any) {
@@ -105,12 +101,16 @@ function remove(node: any, data: Tree) {
 }
 
 function 插入根节点() {
-  const 节点 = {
+  树形结构.value.push(返回一个节点())
+}
+
+function 返回一个节点(): Tree {
+  return {
     id: nanoid(),
-    label: `新节点${dayjs().format('HH:mm:ss')}`,
+    label: `新节点 ${nanoid()}`,
     isEdit: false,
+    children: [],
   }
-  树形结构.value.push(节点)
 }
 interface Tree {
   id: string
