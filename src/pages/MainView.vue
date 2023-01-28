@@ -10,10 +10,28 @@
           node-key="id"
           default-expand-all
           :expand-on-click-node="false"
+          draggable
+          class="main_tree"
         >
           <template #default="{ node, data }">
-            <span class="flex-1 flex items-center justify-between pr-8px">
-              <span>{{ node.label }}</span>
+            <span class="flex-1 flex items-center justify-between pr-8px node_line">
+              <div class="space-x-8px text-16px">
+                <span v-if="!data.isEdit">{{ data.label }}</span>
+                <el-input
+                  v-else
+                  ref="inputRef"
+                  v-model="data.label"
+                  :style="{ width: '200px' }"
+                  @blur="编辑提交(data)"
+                >
+                </el-input>
+                <i
+                  v-if="!data.isEdit"
+                  i-mingcute-edit-3-line
+                  class="text-18px invisible hover:(c-blue i-mingcute-edit-3-fill)"
+                  @click.stop="编辑节点文字(data)"
+                ></i>
+              </div>
               <span>
                 <el-button link type="primary" @click="append(data)">
                   在此节点下添加
@@ -36,36 +54,31 @@
 <script setup lang="ts">
 import { nanoid } from 'nanoid'
 import dayjs from 'dayjs'
+import { treeTraversal } from '@/utils/treeTools'
 interface Tree {
   id: string
   label: string
+  isEdit: boolean
   children?: Tree[]
 }
 const 树形结构 = ref<Tree[]>([
+  { id: '1', label: '节点 1', isEdit: false },
   {
-    id: '1',
-    label: 'example',
-  },
-  {
-    id: '3',
-    label: 'example-2',
+    id: '2',
+    label: '节点 2',
+    isEdit: false,
     children: [
-      {
-        id: '2',
-        label: 'example-1',
-      },
-      {
-        id: '4',
-        label: 'example-3',
-      },
+      { id: '3', label: '节点 2-1', isEdit: false },
+      { id: '4', label: '节点 2-2', isEdit: false },
     ],
   },
 ])
 
-const append = (data: Tree) => {
+function append(data: Tree) {
   const newChild = {
     id: nanoid(),
     label: `新节点${dayjs().format('YYYY-MM-DD HH:mm:ss')}`,
+    isEdit: false,
     children: [],
   }
   if (!data.children) {
@@ -74,8 +87,19 @@ const append = (data: Tree) => {
   data.children.push(newChild)
   树形结构.value = [...树形结构.value]
 }
+function 编辑提交(node: any) {
+  node.isEdit = false
+}
+const inputRef = ref()
+function 编辑节点文字(data: Tree) {
+  treeTraversal(树形结构.value, (item: Tree) => (item.isEdit = false))
+  data.isEdit = true
+  nextTick(() => {
+    inputRef.value.focus()
+  })
+}
 
-const remove = (node: Node, data: Tree) => {
+function remove(node: any, data: Tree) {
   const parent = node.parent
   const children: Tree[] = parent.data.children || parent.data
   const index = children.findIndex(d => d.id === data.id)
@@ -87,6 +111,7 @@ function 插入根节点() {
   const 节点 = {
     id: nanoid(),
     label: `新节点${dayjs().format('YYYY-MM-DD HH:mm:ss')}`,
+    isEdit: false,
   }
   树形结构.value.push(节点)
 }
@@ -107,12 +132,8 @@ const displayTree = computed<string>(() => {
     if (tree.children && tree.children.length) {
       tree.children.forEach((child, index) => {
         const childIndent = indent + (isTail ? '    ' : '│   ')
-        str += generateString(
-          child,
-          childIndent,
-          index === tree.children.length - 1,
-          false
-        )
+        const idx = tree.children ? tree.children.length - 1 : false
+        str += generateString(child, childIndent, index === idx, false)
       })
     }
     return str
@@ -131,4 +152,17 @@ const displayTree = computed<string>(() => {
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.node_line {
+  &:hover {
+    i {
+      visibility: visible;
+    }
+  }
+}
+.main_tree {
+  :deep(.el-tree-node__content) {
+    height: 36px;
+  }
+}
+</style>

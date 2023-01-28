@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "vite --port 6789 --open",
+    "dev": "vite --port 12515 --open",
     "build": "vue-tsc --noEmit && vite build",
     "lint:fix": "eslint . --fix",
     "clear": "rimraf node_modules&&pnpm i",
