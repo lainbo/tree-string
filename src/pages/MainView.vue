@@ -14,7 +14,9 @@
           class="main_tree"
         >
           <template #default="{ node, data }">
-            <span class="flex-1 flex items-center justify-between pr-8px node_line">
+            <span
+              class="flex-1 flex items-center justify-between h-full pr-8px node_line"
+            >
               <div class="space-x-8px text-16px">
                 <span v-if="!data.isEdit">{{ data.label }}</span>
                 <el-input

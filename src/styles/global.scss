@@ -13,6 +13,14 @@
   src: url('https://efadmin.netlify.app/font/Inter-Medium.woff2') format('woff2');
 }
 
+// 代码字体
+@font-face {
+  font-display: swap;
+  font-family: 'JetBrains';
+  src: url('https://efadmin.netlify.app/font/JetBrainsMonoNL-Regular.woff2')
+    format('woff2');
+}
+
 .dark {
   color-scheme: dark;
 }
@@ -29,6 +37,11 @@ body,
     sans-serif !important;
   background-color: #fff;
   height: 100vh;
+}
+
+pre {
+  font-family: 'JetBrains Mono NL', 'JetBrains', 'HarmonyOS Sans SC Medium',
+    'HarmonyOS Medium', Menlo, Monaco, Consolas;
 }
 
 ::-webkit-scrollbar {
