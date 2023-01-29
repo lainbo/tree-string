@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import '@unocss/reset/tailwind.css'
 import App from './App.vue'
+import '@/styles/index.scss'
 import 'uno.css'
-import '@/styles/global.scss'
-import 'element-plus/theme-chalk/dark/css-vars.css'
 createApp(App).mount('#app')

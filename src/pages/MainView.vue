@@ -31,7 +31,8 @@
                 <i
                   v-if="!data.isEdit"
                   i-mingcute-edit-3-line
-                  class="text-18px invisible hover:(c-blue i-mingcute-edit-3-fill)"
+                  text="18px hover:primary"
+                  class="invisible hover:i-mingcute-edit-3-fill"
                   @click.stop="编辑节点文字(data)"
                 ></i>
               </div>
@@ -53,9 +54,12 @@
             <i i-ic-baseline-content-copy></i>
           </el-button>
         </div>
-        <pre class="whitespace-pre-wrap flex-1 overflow-scroll text-18px">{{
-          displayTree
-        }}</pre>
+
+        <pre
+          text="18px #606266 dark:#cfd3dc"
+          class="whitespace-pre-wrap flex-1 overflow-scroll"
+          >{{ displayTree }}</pre
+        >
       </div>
     </div>
   </div>
@@ -73,12 +77,12 @@ interface Tree {
   children?: Tree[]
 }
 const 树形结构 = ref<Tree[]>([
-  { id: '1', label: '节点 1', isEdit: false },
+  { id: '1', label: '节点1', isEdit: false },
   {
     id: '2',
-    label: '节点 2',
+    label: '节点2',
     isEdit: false,
-    children: [{ id: '3', label: '节点 2-1', isEdit: false }],
+    children: [{ id: '3', label: '节点2-1', isEdit: false }],
   },
 ])
 const displayTree = computed<string>(() => {
@@ -175,7 +179,7 @@ interface Tree {
   }
 }
 .main_tree {
-  :deep(.el-tree-node__content) {
+  :deep(.ep-tree-node__content) {
     height: 36px;
   }
 }

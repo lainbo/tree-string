@@ -6,7 +6,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import UnoCSS from 'unocss/vite'
 import DefineOptions from 'unplugin-vue-define-options/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-
+const pathSrc = path.resolve(__dirname, 'src')
 export default defineConfig({
   base: './',
   css: {
@@ -19,21 +19,29 @@ export default defineConfig({
   plugins: [
     vue(),
     AutoImport({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [
+        ElementPlusResolver({
+          importStyle: 'sass',
+        }),
+      ],
       imports: ['vue', '@vueuse/core'],
       dts: 'src/typings/auto-imports.d.ts',
       vueTemplate: true,
     }),
     UnoCSS(),
     Components({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [
+        ElementPlusResolver({
+          importStyle: 'sass',
+        }),
+      ],
       dts: 'src/typings/components.d.ts',
     }),
     DefineOptions(),
   ],
   resolve: {
     alias: {
-      '@/': `${path.resolve(__dirname, 'src')}/`,
+      '@/': `${pathSrc}/`,
     },
   },
   build: {

@@ -35,6 +35,11 @@ export default defineConfig({
       },
     }),
   ],
+  theme: {
+    colors: {
+      primary: '#5b61ff',
+    },
+  },
   transformers: [
     transformerDirectives(), // 支持@apply text-center my-0 font-medium;这种写法
     transformerVariantGroup(), // <div class="hover:(bg-gray-400 font-medium) font-(light mono)"/>

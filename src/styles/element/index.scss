@@ -1,8 +1,32 @@
-@forward 'element-plus/theme-chalk/src/common/var.scss' with (
-  $colors: (
-    'primary': (
-      'base': #5b61ff,
-    ),
-  )
+$--colors: (
+  'primary': (
+    'base': #5b61ff,
+  ),
+  'success': (
+    'base': #00b42a,
+  ),
+  'warning': (
+    'base': #ff7d00,
+  ),
+  'danger': (
+    'base': #f53f3f,
+  ),
+  'error': (
+    'base': #f53f3f,
+  ),
 );
-@use 'element-plus/theme-chalk/src/index.scss' as *;
+
+// we can add this to custom namespace, default is 'el'
+@forward 'element-plus/theme-chalk/src/mixins/config.scss' with (
+  $namespace: 'ep'
+);
+
+// You should use them in scss, because we calculate it by sass.
+// comment next lines to use default color
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  // do not use same name, it will override.
+  $colors: $--colors,
+  $button-border-radius: ('default': 2px)
+);
+
+@use './dark.scss';
