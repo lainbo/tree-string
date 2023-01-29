@@ -1,11 +1,12 @@
 <template>
-  <MainView />
+  <div class="h-full flex flex-col bg-#fff dark:(bg-#272728)">
+    <PageHeader p="y-12px r-24px" class="flex justify-end"></PageHeader>
+    <MainView class="flex-1 overflow-hidden" />
+  </div>
 </template>
 
 <script setup lang="ts">
 import MainView from '@/pages/MainView.vue'
-const isDark = useDark()
-const toggleDark = useToggle(isDark)
 </script>
 
 <style lang="scss" scoped></style>

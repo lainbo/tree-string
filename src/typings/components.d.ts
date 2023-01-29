@@ -14,5 +14,6 @@ declare module '@vue/runtime-core' {
     NButton: typeof import('naive-ui')['NButton']
     NSwitch: typeof import('naive-ui')['NSwitch']
     NTree: typeof import('naive-ui')['NTree']
+    PageHeader: typeof import('./../components/PageHeader.vue')['default']
   }
 }

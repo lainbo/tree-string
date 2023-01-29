@@ -1,5 +1,5 @@
 <template>
-  <div class="p-24px h-full bg-#fff dark:(bg-#272728)">
+  <div class="p-24px pt-0">
     <div class="grid gap-24px grid-cols-2 w-full h-full">
       <div class="page-card flex flex-col overflow-hidden pr-0">
         <div class="mb-16px">
@@ -53,7 +53,9 @@
             <i i-ic-baseline-content-copy></i>
           </el-button>
         </div>
-        <pre class="whitespace-pre-wrap flex-1 overflow-scroll">{{ displayTree }}</pre>
+        <pre class="whitespace-pre-wrap flex-1 overflow-scroll text-18px">{{
+          displayTree
+        }}</pre>
       </div>
     </div>
   </div>
@@ -173,7 +175,6 @@ interface Tree {
   }
 }
 .main_tree {
-  height: 5000px;
   :deep(.el-tree-node__content) {
     height: 36px;
   }
