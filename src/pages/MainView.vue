@@ -48,6 +48,11 @@
         </el-tree>
       </div>
       <div class="page-card">
+        <div class="flex justify-end mb-8px">
+          <el-button @click="复制字符()">
+            <i i-ic-baseline-content-copy></i>
+          </el-button>
+        </div>
         <pre class="whitespace-pre-wrap">{{ displayTree }}</pre>
       </div>
     </div>
@@ -74,7 +79,45 @@ const 树形结构 = ref<Tree[]>([
     children: [{ id: '3', label: '节点 2-1', isEdit: false }],
   },
 ])
+const displayTree = computed<string>(() => {
+  function generateString(tree: Tree, indent = '', isTail = true, isRoot = true): string {
+    let str = ''
+    if (!isRoot || (isRoot && 树形结构.value.length > 1)) {
+      str = `${indent}${isTail ? '└── ' : '├── '}${tree.label}\n`
+    } else {
+      str = `${tree.label}\n`
+    }
+    if (tree.children && tree.children.length) {
+      tree.children.forEach((child, index) => {
+        const childIndent = indent + (isTail ? '    ' : '│   ')
+        const idx = tree.children ? tree.children.length - 1 : false
+        str += generateString(child, childIndent, index === idx, false)
+      })
+    }
+    return str
+  }
+  let isLast = false
+  let str = ''
+  const traverse = (tree: Tree[]) => {
+    tree.forEach((child, index) => {
+      isLast = index === tree.length - 1
+      str += generateString(child, '', isLast, tree.length === 1)
+    })
+  }
 
+  traverse(树形结构.value as Tree[])
+  return str
+})
+
+const { copy } = useClipboard({ source: displayTree.value })
+function 复制字符() {
+  copy(displayTree.value)
+  ElMessage({
+    message: '复制成功',
+    grouping: true,
+    type: 'success',
+  })
+}
 function append(data: Tree) {
   if (!data.children) {
     data.children = []
@@ -119,36 +162,6 @@ interface Tree {
   label: string
   children?: Tree[]
 }
-
-const displayTree = computed<string>(() => {
-  function generateString(tree: Tree, indent = '', isTail = true, isRoot = true): string {
-    let str = ''
-    if (!isRoot || (isRoot && 树形结构.value.length > 1)) {
-      str = `${indent}${isTail ? '└── ' : '├── '}${tree.label}\n`
-    } else {
-      str = `${tree.label}\n`
-    }
-    if (tree.children && tree.children.length) {
-      tree.children.forEach((child, index) => {
-        const childIndent = indent + (isTail ? '    ' : '│   ')
-        const idx = tree.children ? tree.children.length - 1 : false
-        str += generateString(child, childIndent, index === idx, false)
-      })
-    }
-    return str
-  }
-  let isLast = false
-  let str = ''
-  const traverse = (tree: Tree[]) => {
-    tree.forEach((child, index) => {
-      isLast = index === tree.length - 1
-      str += generateString(child, '', isLast, tree.length === 1)
-    })
-  }
-
-  traverse(树形结构.value as Tree[])
-  return str
-})
 </script>
 
 <style lang="scss" scoped>
