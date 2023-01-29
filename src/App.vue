@@ -1,7 +1,10 @@
 <template>
   <el-config-provider namespace="ep">
     <div class="h-full flex flex-col bg-#fff dark:(bg-#272728)">
-      <PageHeader p="y-12px r-24px" class="flex justify-end"></PageHeader>
+      <div p="y-12px x-24px" class="flex justify-between">
+        <Logo></Logo>
+        <PageHeader></PageHeader>
+      </div>
       <MainView class="flex-1 overflow-hidden" />
     </div>
   </el-config-provider>

@@ -1,6 +1,6 @@
 <template>
-  <div class="p-24px pt-0">
-    <div class="grid gap-24px grid-cols-2 w-full h-full">
+  <div class="px-24px pt-0 py-40px">
+    <div class="grid gap-32px grid-cols-2 w-full h-full">
       <div class="page-card flex flex-col overflow-hidden pr-0">
         <div class="mb-16px">
           <el-button @click="插入根节点()">插入根节点</el-button>
