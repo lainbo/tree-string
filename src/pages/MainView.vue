@@ -1,5 +1,5 @@
 <template>
-  <div class="p-24px h-full">
+  <div class="p-24px h-full bg-#fff dark:(bg-#272728)">
     <div class="grid gap-24px grid-cols-2 w-full h-full">
       <div class="page-card flex flex-col overflow-hidden pr-0">
         <div class="mb-16px">
