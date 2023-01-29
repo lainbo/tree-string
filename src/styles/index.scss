@@ -67,22 +67,21 @@ img {
   image-rendering: crisp-edges;
 }
 
-// element UI Message 样式变更
-.el-message {
+.ep-message {
   min-width: inherit;
   padding: 12px 16px;
   z-index: 6000;
   @apply bg-#fff dark:bg-#373739;
 
-  .el-message__icon {
+  .ep-message__icon {
     font-size: 18px;
   }
 
-  .el-message__content {
+  .ep-message__content {
     line-height: 18px;
   }
 
-  &.el-message--info {
+  &.ep-message--info {
     border-color: rgba(#fff, 0.15);
   }
 
@@ -92,7 +91,7 @@ img {
     border: none;
     color: #000;
     @apply text-#000 dark:text-#fff;
-    .el-message__content {
+    .ep-message__content {
       color: inherit;
     }
 
@@ -101,7 +100,7 @@ img {
     }
   }
 
-  &.ele-message-loading .el-message__icon {
+  &.ele-message-loading .ep-message__icon {
     animation: rotating 1s linear infinite;
 
     &:before {
