@@ -1,7 +1,7 @@
 <template>
   <div class="p-24px h-full">
     <div class="grid gap-24px grid-cols-2 w-full h-full">
-      <div class="page-card">
+      <div class="page-card flex flex-col overflow-hidden pr-0">
         <div class="mb-16px">
           <el-button @click="插入根节点()">插入根节点</el-button>
         </div>
@@ -11,7 +11,7 @@
           default-expand-all
           :expand-on-click-node="false"
           draggable
-          class="main_tree"
+          class="main_tree flex-1 overflow-scroll"
         >
           <template #default="{ node, data }">
             <span
@@ -47,13 +47,13 @@
           </template>
         </el-tree>
       </div>
-      <div class="page-card">
+      <div class="page-card flex flex-col overflow-hidden">
         <div class="flex justify-end mb-8px">
           <el-button @click="复制字符()">
             <i i-ic-baseline-content-copy></i>
           </el-button>
         </div>
-        <pre class="whitespace-pre-wrap">{{ displayTree }}</pre>
+        <pre class="whitespace-pre-wrap flex-1 overflow-scroll">{{ displayTree }}</pre>
       </div>
     </div>
   </div>
@@ -173,6 +173,7 @@ interface Tree {
   }
 }
 .main_tree {
+  height: 5000px;
   :deep(.el-tree-node__content) {
     height: 36px;
   }

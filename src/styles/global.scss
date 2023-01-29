@@ -45,18 +45,18 @@ pre {
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: 4px;
   border-width: 0px;
-  @apply bg-#c9cdd4 dark:bg-#5f5f60;
+  @apply bg-#e6e6e6 dark:bg-#5f5f60;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-#86909c dark:bg-#929293;
+  @apply bg-#bfbfbf dark:bg-#929293;
 }
 
 ::-webkit-scrollbar-track-piece {
