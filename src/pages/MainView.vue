@@ -1,6 +1,6 @@
 <template>
   <div class="px-24px pt-0 py-40px">
-    <div class="grid gap-32px grid-cols-2 w-full h-full">
+    <div class="grid gap-32px grid-cols-2 w-full h-full lt-md:grid-cols-1">
       <div class="page-card flex flex-col overflow-hidden pr-0">
         <div class="mb-16px">
           <el-button @click="插入根节点()">插入根节点</el-button>
@@ -56,8 +56,8 @@
         </div>
 
         <pre
-          text="18px #606266 dark:#cfd3dc"
-          class="whitespace-pre-wrap flex-1 overflow-scroll"
+          text="16px #606266 dark:#cfd3dc"
+          class="whitespace-pre-wrap flex-1 overflow-scroll font-500"
           >{{ displayTree }}</pre
         >
       </div>
@@ -158,7 +158,7 @@ function 插入根节点() {
 function 返回一个节点(): Tree {
   return {
     id: nanoid(),
-    label: `新节点 ${nanoid()}`,
+    label: `新节点${nanoid()}`,
     isEdit: false,
     children: [],
   }
