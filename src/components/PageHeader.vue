@@ -16,6 +16,6 @@ const toggleDark = useToggle(isDark)
 
 <style lang="scss" scoped>
 .info_wrapper i {
-  @apply transition-color text-#383838b3 hover:text-#383838 dark:(text-#fff hover:text-#fff);
+  @apply transition-color text-#383838b3 hover:text-#383838 dark:I_text-#fff;
 }
 </style>
