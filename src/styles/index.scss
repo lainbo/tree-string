@@ -114,6 +114,6 @@ img {
   --page-card-shadow: 0 4px 8px 1px #ececec;
 }
 
-:root[class='dark'] {
+:root[class~='dark'] {
   --page-card-shadow: 9px 9px 18px #232324;
 }
