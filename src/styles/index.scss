@@ -98,9 +98,10 @@ img {
 }
 
 :root {
-  --page-card-shadow: 0 4px 8px 1px #ececec;
+  --web-bg: linear-gradient(to bottom, #fff 0%, #f5f4f4 100%);
 }
 
 :root[class~='dark'] {
-  --page-card-shadow: 9px 9px 18px #232324;
+  --web-bg: linear-gradient(to bottom, #323232 0%, #3f3f3f 40%, #111 150%),
+    linear-gradient(to top, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.25) 200%);
 }

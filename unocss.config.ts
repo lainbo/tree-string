@@ -12,7 +12,7 @@ export default defineConfig({
   shortcuts: [
     {
       'page-card':
-        'rounded-12px p-16px auto-bg shadow-[var(--page-card-shadow)] border border-#f2f3f4 dark:border-#444',
+        'rounded-lg p-16px auto-bg shadow-lg border border-#f2f3f4 dark:(border-#444 shadow-xl)',
       'auto-bg': 'bg-#fff dark:bg-#2a2a2b',
       'flex-c': 'flex items-center justify-center',
       'flex-y-c': 'flex items-center',
