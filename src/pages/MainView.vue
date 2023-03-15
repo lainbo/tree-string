@@ -2,11 +2,18 @@
   <div class="px-24px pt-0 py-40px">
     <div class="grid gap-32px grid-cols-2 w-full h-full lt-md:grid-cols-1">
       <div class="page-card flex flex-col overflow-hidden pr-0">
-        <div class="mb-16px">
-          <el-button @click="插入根节点()">插入根节点</el-button>
+        <div class="mb-16px flex justify-between">
+          <div>
+            <el-button type="primary" @click="插入根节点()">插入根节点</el-button>
+            <el-button type="danger" plain @click="重置数据()">重置数据</el-button>
+          </div>
+          <div class="flex items-center space-x-8px pr-16px">
+            <span>节点拖拽</span>
+            <el-switch v-model="treeDrag" />
+          </div>
         </div>
         <el-tree
-          :data="树形结构"
+          :data="树形结构.data"
           node-key="id"
           default-expand-all
           :expand-on-click-node="false"
@@ -18,7 +25,7 @@
               class="flex-1 flex items-center justify-between h-full pr-8px node_line"
             >
               <div class="space-x-8px text-16px">
-                <span v-if="!data.isEdit">{{ data.label }}</span>
+                <span v-if="!data.isEdit">{{ data.label || '-' }}</span>
                 <el-input
                   v-else
                   ref="inputRef"
@@ -66,6 +73,7 @@
 </template>
 
 <script setup lang="ts">
+import { cloneDeep } from 'lodash-es'
 import { customAlphabet } from 'nanoid'
 import { treeTraversal } from '@/utils/treeTools'
 const str = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_'
@@ -76,7 +84,7 @@ interface Tree {
   isEdit: boolean
   children?: Tree[]
 }
-const 树形结构 = ref<Tree[]>([
+const 树形数据原始数据 = [
   { id: '1', label: '节点1', isEdit: false },
   {
     id: '2',
@@ -84,11 +92,13 @@ const 树形结构 = ref<Tree[]>([
     isEdit: false,
     children: [{ id: '3', label: '节点2-1', isEdit: false }],
   },
-])
+]
+const 树形结构 = useStorage('TREEDATA', { data: cloneDeep(树形数据原始数据) })
+
 const displayTree = computed<string>(() => {
   function generateString(tree: Tree, indent = '', isTail = true, isRoot = true): string {
     let str = ''
-    if (!isRoot || (isRoot && 树形结构.value.length > 1)) {
+    if (!isRoot || (isRoot && 树形结构.value.data.length > 1)) {
       str = `${indent}${isTail ? '└── ' : '├── '}${tree.label}\n`
     } else {
       str = `${tree.label}\n`
@@ -111,7 +121,7 @@ const displayTree = computed<string>(() => {
     })
   }
 
-  traverse(树形结构.value as Tree[])
+  traverse(树形结构.value.data as Tree[])
   return str
 })
 
@@ -131,14 +141,14 @@ function append(data: Tree) {
     data.children = []
   }
   data.children.push(返回一个节点())
-  树形结构.value = [...树形结构.value]
+  树形结构.value.data = [...树形结构.value.data]
 }
 function 编辑提交(node: any) {
   node.isEdit = false
 }
 const inputRef = ref()
 function 编辑节点文字(data: Tree) {
-  treeTraversal(树形结构.value, (item: Tree) => (item.isEdit = false))
+  treeTraversal(树形结构.value.data, (item: Tree) => (item.isEdit = false))
   data.isEdit = true
   nextTick(() => {
     inputRef.value.focus()
@@ -150,11 +160,15 @@ function remove(node: any, data: Tree) {
   const children: Tree[] = parent.data.children || parent.data
   const index = children.findIndex(d => d.id === data.id)
   children.splice(index, 1)
-  树形结构.value = [...树形结构.value]
+  树形结构.value.data = [...树形结构.value.data]
 }
 
 function 插入根节点() {
-  树形结构.value.push(返回一个节点())
+  树形结构.value.data.push(返回一个节点())
+}
+
+function 重置数据() {
+  树形结构.value.data = cloneDeep(树形数据原始数据)
 }
 
 function 返回一个节点(): Tree {
