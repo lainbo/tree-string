@@ -25,6 +25,7 @@
     "@types/lodash-es": "^4.17.7",
     "@types/node": "18.15.3",
     "@unocss/preset-rem-to-px": "^0.50.4",
+    "@unocss/preset-web-fonts": "^0.50.4",
     "@unocss/reset": "^0.50.4",
     "@vitejs/plugin-vue": "^4.0.0",
     "eslint": "^8.36.0",

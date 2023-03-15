@@ -1,0 +1,44 @@
+@use './HarmonyOS_Font_Rules.scss' as m; // 引入unicode-range规则文件
+
+$provider: 'free'; // 如果值为'free'，将使用B站的字体文件，否则使用Netlify字体文件
+$weightStr: 'Medium'; // 可选值：'Regular'|'Medium'，不填或填错，将降级为'Regular'
+$fontBaseUrl: 'https://fast-naptime.netlify.app'; // Netlify字体文件路径
+$freeFontBaseUrl: 'https://s1.hdslb.com'; // B站字体文件路径
+$fontInfoMap: (
+  'Regular': (
+    'family': 'HarmonyOS_Regular',
+    'weight': 400,
+  ),
+  'Medium': (
+    'family': 'HarmonyOS_Medium',
+    'weight': 500,
+  ),
+);
+
+// 判断$weightStr的值是否在$fontInfoMap中存在，不存在则降级为'Regular'
+$correctWeightStr: if(map-has-key($fontInfoMap, $weightStr), $weightStr, 'Regular');
+
+@mixin generateFontFace($file, $unicodeRange) {
+  $_fontInfo: map-get($fontInfoMap, $correctWeightStr);
+  $_fontFamily: map-get($_fontInfo, 'family');
+  $_fontWeight: map-get($_fontInfo, 'weight');
+
+  @font-face {
+    font-family: $_fontFamily;
+    font-style: normal;
+    font-weight: $_fontWeight;
+    font-display: swap;
+    @if $provider == 'free' {
+      src: url('#{$freeFontBaseUrl}/bfs/static/jinkela/long/font/#{$_fontFamily}.#{$file}.woff2')
+        format('woff2');
+    } @else {
+      src: url('#{$fontBaseUrl}/font/HarmonyOS_Font_#{$correctWeightStr}/#{$_fontFamily}.#{$file}.woff2')
+        format('woff2');
+    }
+    unicode-range: #{$unicodeRange};
+  }
+}
+
+@each $fontFile, $range in m.$fontRangeMap {
+  @include generateFontFace($fontFile, $range);
+}

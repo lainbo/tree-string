@@ -1,26 +1,5 @@
 @use 'element-plus/theme-chalk/src/dark/css-vars.scss' as *;
-// 鸿蒙字体
-@font-face {
-  font-display: swap;
-  font-family: 'HarmonyOS Medium';
-  src: url('https://efadmin.netlify.app/font/HarmonyOS_Sans_SC_Medium.woff2')
-    format('woff2');
-}
-
-// 英文字体
-@font-face {
-  font-display: swap;
-  font-family: 'Inter';
-  src: url('https://efadmin.netlify.app/font/Inter-Medium.woff2') format('woff2');
-}
-
-// 代码字体
-@font-face {
-  font-display: swap;
-  font-family: 'JetBrains';
-  src: url('https://efadmin.netlify.app/font/JetBrainsMonoNL-Regular.woff2')
-    format('woff2');
-}
+@use './HarmonyOS_Font.scss'; // 英文字体
 
 .dark {
   color-scheme: dark;
@@ -33,15 +12,23 @@
 html,
 body,
 #app {
-  font-family: 'Inter', 'HarmonyOS Sans SC Medium', 'HarmonyOS Medium', 'NanumGothic',
+  font-family: 'Inter', 'HarmonyOS Sans SC Medium', 'HarmonyOS_Medium', 'NanumGothic',
     'NotoSansThai', system-ui, —apple-system, Segoe UI, Rototo, Helvetica, Arial,
     sans-serif !important;
   height: 100vh;
 }
 
 pre {
-  font-family: 'JetBrains Mono NL', 'JetBrains', 'HarmonyOS Sans SC Medium',
-    'HarmonyOS Medium', Menlo, Monaco, Consolas;
+  font-family: 'JetBrains Mono', 'Cascadia Mono', Menlo, Monaco, Consolas,
+    'HarmonyOS Sans SC Medium', 'HarmonyOS_Medium';
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+::selection {
+  @apply bg-primary text-#fff dark:bg-#646cff;
 }
 
 ::-webkit-scrollbar {

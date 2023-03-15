@@ -7,6 +7,7 @@ import {
   transformerVariantGroup,
 } from 'unocss'
 import presetRemToPx from '@unocss/preset-rem-to-px'
+import presetWebFonts from '@unocss/preset-web-fonts'
 export default defineConfig({
   shortcuts: [
     {
@@ -26,6 +27,13 @@ export default defineConfig({
     presetWind(), // presetWind和presetUno的区别是，用presetWind的预设可以获得VS Code中windicss插件的提示，其他的都一样
     presetRemToPx(),
     presetAttributify(), // 属性化写法，如<div border="2 rounded blue-200" />
+    presetWebFonts({
+      fonts: {
+        provider: 'bunny',
+        Inter: [{ name: 'Inter', weights: ['500'] }],
+        JetBrainsMono: [{ name: 'JetBrains Mono' }],
+      },
+    }),
     presetIcons({
       warn: true,
       extraProperties: {

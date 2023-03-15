@@ -10,7 +10,7 @@
           node-key="id"
           default-expand-all
           :expand-on-click-node="false"
-          draggable
+          :draggable="treeDrag"
           class="main_tree flex-1 overflow-scroll"
         >
           <template #default="{ node, data }">
@@ -114,6 +114,8 @@ const displayTree = computed<string>(() => {
   traverse(树形结构.value as Tree[])
   return str
 })
+
+const treeDrag = ref(false)
 
 const { copy } = useClipboard({ source: displayTree.value })
 function 复制字符() {
