@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'node:path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
@@ -45,12 +45,10 @@ export default defineConfig({
     },
   },
   build: {
-    assetsInlineLimit: 4096,
-    chunkSizeWarningLimit: 4096,
-    cssCodeSplit: true,
-    sourcemap: false,
+    target: 'es2021',
     minify: 'terser',
     terserOptions: {
+      ecma: 2020,
       compress: {
         drop_console: true,
         drop_debugger: true,
