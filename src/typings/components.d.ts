@@ -14,11 +14,7 @@ declare module '@vue/runtime-core' {
     ElInput: typeof import('element-plus/es')['ElInput']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
     ElTree: typeof import('element-plus/es')['ElTree']
-    HelloWorld: typeof import('./../components/HelloWorld.vue')['default']
     Logo: typeof import('./../components/Logo.vue')['default']
-    NButton: typeof import('naive-ui')['NButton']
-    NSwitch: typeof import('naive-ui')['NSwitch']
-    NTree: typeof import('naive-ui')['NTree']
     PageHeader: typeof import('./../components/PageHeader.vue')['default']
   }
 }
